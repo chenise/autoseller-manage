@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import  Login  from  '../views/Login'
 import  PageNotFound from '../views/PageNotFound'
+import  index from  '../router/index.js'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ export const constantRouterMap  = [
     path: '/404',
     component: PageNotFound,
     name: '404'
+  },
+  {
+    path: '/',
+    component:index,
+    name: '首页'
   },
   {
     path: '*',

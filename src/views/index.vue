@@ -1,9 +1,9 @@
 <template lang="html">
-<div class="">
-  ssssssssssssssssssssssssssss
-</div>
-</template>
 
+</template>
+<div class="">
+  oooooooooooooooooooooooooo
+</div>
 <script>
 export default {
 }

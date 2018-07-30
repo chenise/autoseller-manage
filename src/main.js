@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
+import Vuex from 'vuex'
+import store from './vuex/store'
 
 
 import 'element-ui/lib/theme-chalk/index.css'
@@ -23,12 +25,15 @@ router.beforeEach((to,from,next) => {
   next(to.path)
   }
   let user = JSON.parse(sessionStorage.getItem('user'));
-  if{!user}{
+  if(!user) {
     next({path: '/login'})
   }
-  if(store.getters.menus === undefined){
-    store.dispatch('getMenu', user[userId]).then
+  if(store.user.menus === undefined){
+    store.dispatch('getMenu').then
 
+  }
+  else {
+    next();
   }
 
 })

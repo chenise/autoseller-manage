@@ -13,6 +13,7 @@
 </el-form>
 </template>
 <script>
+import { mapActions } from 'vuex'
   export default {
     data() {
       var validatePass = (rule, value, callback) => {
@@ -48,10 +49,11 @@
       };
     },
     methods: {
+      ...mapActions(['getUserInfo']),
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            this.store.dispatch('getUserInfo',userInfo)
           } else {
             console.log('error submit!!');
             return false;
