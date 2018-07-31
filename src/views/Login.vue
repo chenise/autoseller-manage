@@ -1,13 +1,13 @@
 <template lang="html">
-  <el-form :model="userInfo" status-icon :rules="rules" ref="userInfo" label-width="100px" class="">
+  <el-form :model="user" status-icon :rules="rules" ref="user" label-width="100px" class="">
   <el-form-item label=账号 prop="account">
-    <el-input v-model="userInfo.account" auto-complete="off"></el-input>
+    <el-input v-model="user.account" auto-complete="off"></el-input>
   </el-form-item>
   <el-form-item label="密码" prop="password">
-    <el-input type="password" v-model="userInfo.password" auto-complete="off"></el-input>
+    <el-input type="password" v-model="user.password" auto-complete="off"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('userInfo')">提交</el-button>
+    <el-button type="primary" @click="submitForm('user')">提交</el-button>
     <el-button @click="resetForm('userInfo')">重置</el-button>
   </el-form-item>
 </el-form>
@@ -20,8 +20,8 @@ import { mapActions } from 'vuex'
         if (value === '') {
           callback(new Error('请输入密码'));
         } else {
-          if (this.userInfo.password !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
+          if (this.user.password !== '') {
+            this.$refs.user.validateField('checkPass');
           }
           callback();
         }
@@ -34,7 +34,7 @@ import { mapActions } from 'vuex'
         }
       };
       return {
-        userInfo: {
+        user: {
           account: '',
           password: ''
         },
@@ -53,7 +53,13 @@ import { mapActions } from 'vuex'
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.store.dispatch('getUserInfo',userInfo)
+            this.store.dispatch('getUserInfo',user).then(() => {
+              this.$router.push(this.$store.state.targetPath)
+            },(error) =>{
+              console.log('error');
+              this.$router.push('/login')
+
+            })
           } else {
             console.log('error submit!!');
             return false;

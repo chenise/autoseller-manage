@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import  Login  from  '../views/Login'
 import  PageNotFound from '../views/PageNotFound'
-import  index from  '../router/index.js'
+import  Index from  '../views/Index'
 
 Vue.use(Router)
 
@@ -13,7 +13,6 @@ export const constantRouterMap  = [
     component: Login,
     name: '登录'
   },
-
   {
     path: '/404',
     component: PageNotFound,
@@ -21,18 +20,18 @@ export const constantRouterMap  = [
   },
   {
     path: '/',
-    component:index,
-    name: '首页'
-  },
-  {
-    path: '*',
-    hidden: true,
-    redirect: { path: '/404' }
-    }
+    component: Index,
+    name: "首页"
+  }
 ];
 
-export const asyncRouterMap = [];
+export const asyncRouterMap = [{
+  path: '*',
+  hidden: true,
+  redirect: { path: '/404' }
+  }];
 
 export default new Router({
-  routes: constantRouterMap
+  routes: constantRouterMap,
+  mode:"history"
 })

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let base = '/api';
+let base = process.env.API_ROOT;
 export  const Login = params => {
   return  axios.post('${base}/login',params)
 };

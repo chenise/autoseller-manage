@@ -1,9 +1,8 @@
 <template lang="html">
-
-</template>
-<div class="">
-  oooooooooooooooooooooooooo
+<div class="f">
+  ggggg
 </div>
+</template>
 <script>
 export default {
 }
