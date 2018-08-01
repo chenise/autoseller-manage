@@ -1,11 +1,10 @@
-
-
+import {Login} from  '../../../api/api.js';
 const  user = {
   state: {
     userInfo: {
       group: '',
       roles: [],
-      userId: ''
+      userId: 0
     },
     menus: [],
     asyncRouter: [],
@@ -27,7 +26,7 @@ const  user = {
       state.menus = state.asyncRouter.concat(constantRouterMap)
     },
     SET_USERINFO: (state,userinfo) => {
-      state.userInfo = usinfo
+      state.userInfo = userinfo;
     },
     SET_MSG: (state,message) => {
       state.msg = message
@@ -38,23 +37,35 @@ const  user = {
 
   },
   actions: {
-    getUserInfo({commit},user) {
-      return new Promise((resolve,reject) =>{
-        Login(user).then(function (response) {
-          const  usinfo = response.data;
-          commit('SET_USERINFO',usinfo);
-
-        }, function (error){
-          reject(error)
-        }
-      ).then(() => {
-        commit('SET_MENUS')
+     getUserInfo({commit},user) {
+      // return new Promise((resolve,reject) => {
+      //   Login(user).then(function (response) {
+      //     console.log(response)
+      //     alert(1);
+      //     const  usinfo = response.data;
+      //     console.log(usinfo);
+      //     commit('SET_USERINFO',usinfo);
+      //
+      //   }, function (error){
+      //     reject(error)
+      //   }
+      // ).then(() => {
+      //   commit('SET_MENUS')
+      // })
+      // }
+      // )
+      Login(user).then((response) =>{
+        console.log(response);
+        var usinfo = response.data;
+        commit('SET_USERINFO',usinfo)
+      },(err) =>{
+        console.log(err)
       })
-      }
-      )
+
+
     },
     logoutFromClient({commit},userId) {
-      return new  Promise((resolve,reject) =>{
+      return new  Promise((resolve,reject) => {
         Logout(userId).then(function (response) {
           let data = response.data;
           commit('SET_MSG',data.msg);

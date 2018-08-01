@@ -6,7 +6,7 @@ import router from './router/index.js'
 import ElementUI from 'element-ui'
 import Vuex from 'vuex'
 import store from './vuex/store'
-//import Mock  from  'mockjs'
+import {mlogin}  from  '../mock'
 
 
 import 'element-ui/lib/theme-chalk/index.css'

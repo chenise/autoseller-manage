@@ -20,9 +20,6 @@ import { mapActions } from 'vuex'
         if (value === '') {
           callback(new Error('请输入密码'));
         } else {
-          if (this.user.password !== '') {
-            this.$refs.user.validateField('checkPass');
-          }
           callback();
         }
       };
@@ -53,10 +50,10 @@ import { mapActions } from 'vuex'
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.store.dispatch('getUserInfo',user).then(() => {
+            this.$store.dispatch('getUserInfo',this.user).then(() => {
               this.$router.push(this.$store.state.targetPath)
             },(error) =>{
-              console.log('error');
+              console.log(error);
               this.$router.push('/login')
 
             })
